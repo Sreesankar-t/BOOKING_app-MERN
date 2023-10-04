@@ -1,0 +1,13 @@
+/* .home */
+.home {
+    display: flex;
+  }
+  
+  /* .home .homeContainer */
+  .home .homeContainer {
+    flex: 6;
+  }
+  
+  /* .home .homeContainer .widgets, .home .homeContainer .charts */
+
+  

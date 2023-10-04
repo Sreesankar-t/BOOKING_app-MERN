@@ -1,0 +1,218 @@
+
+.main {
+ 
+  width: 100%;
+  height: 100vh;
+  background-color:#000000;
+  /* background-image: url('https://img.freepik.com/premium-photo/white-arch-with-tropical-maldives-resort-sea-background_1339-168554.jpg?w=2000'); */
+  background-size: cover; /* This property scales the image to cover the entire element */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  /* You can add more background properties as needed */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  
+}
+.base{
+  
+  width: 850px;
+  height: 700px;
+
+  border: 0ch;
+
+  background-color: #000000;
+}
+
+.navlnavbar{
+  width: 100%;
+  height: 6rem;
+  background-color: rgb(27, 27, 30);
+ 
+}
+
+
+.lbody{
+  background-color: rgb(0, 1, 1);
+  height: 600px;
+  width: 100%;
+  display: flex;
+ 
+}
+.limage{
+  width: 50%;
+  height: 510px;
+  background-image: url('https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/07/d5/77/rambagh-palace-exterior.jpg?w=1200&h=-1&s=1');
+  background-size: cover; /* This property scales the image to cover the entire element */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  /* You can add more background properties as needed */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.lcontent{
+  width: 50%;
+  height: 510px;
+background-color: whitesmoke;
+  background-size: cover; /* This property scales the image to cover the entire element */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  /* You can add more background properties as needed */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+border: 1px;
+}
+
+.nameContent{
+  width: 100%;
+  height: 200px;
+  background-color: whitesmoke;
+  display: flex;
+  justify-content: center; /* Horizontally center the child */
+  align-items: center; /* Vertically center the child */
+}
+.wrapper{
+  width: 50px;
+  width: 400px;
+  justify-content: center;
+  padding-top: 50px;
+}
+
+.siteName{
+  margin-bottom: 20px;
+  justify-content: center;
+  padding-left: 120PX;
+}
+.siteName1{
+  margin-bottom: 20px;
+  justify-content: center;
+  padding-left: 160PX;
+}
+.siteName2{
+  margin-bottom: 10px;
+  justify-content: center;
+ 
+  display: flex;
+  justify-content: center;
+ 
+}
+.siteName2 a {
+  text-decoration: none; /* Remove underline */
+}
+.l{
+/* margin-right: 10px; */
+background-color: #000000;
+color: rgb(251, 246, 246);
+justify-content: center;
+width: 60px;
+min-height: 30px;
+text-align: center;
+padding-top: 10px;
+border-radius: 5px 0 0 5px;
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+text-decoration: none;
+}
+.r{
+/* margin-right: 10px; */
+width: 60px;
+padding-top: 10px;
+background-color: #ffffff;
+color: rgb(0, 0, 0);
+justify-content: center;
+text-align: center;
+border-radius: 0 5px 5px 0; /* top-left top-right bottom-right bottom-left */
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
+
+
+
+
+.login {
+  height: 450;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color:whitesmoke; /* Set  desired background color */
+}
+  
+.lContainer {
+
+  padding: 10px;
+  border-radius: 5px;
+
+  display: flex;
+  flex-direction: column; /* Set the direction to column */
+  align-items: center; /* Center form elements horizontally */
+}
+  
+.lInput {
+  height: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px; /* Add some space between input fields */
+  border: none;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a box shadow for a card-like effect */
+  width: 100%; /* Make input fields take up full width */
+}
+  
+  .lButton {
+    width: 100%;
+    border: none;
+    padding: 10px 20px;
+    background-color: #000000;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .lButton:disabled{
+    background-color: #03243c8c;
+    cursor: not-allowed;
+  }
+
+
+
+
+
+
+  .navbar{
+    height: 50px;
+    background-color: #000000;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .lnavContainer{
+    width: 100%;
+    max-width: 1024px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+   background-color: rgb(0, 0, 0);
+   padding-top: 10px;
+   height: 100%;
+  }
+  
+  .lLogo{
+    font-weight: 500;
+    padding-left: 170px;
+    text-decoration: none;
+  }
+  
+  .lnavButton{
+    border: 1px solid rgb(79, 79, 79);
+    padding: 10px;
+    border-radius: 10px;
+    color: #ffffff;
+    background-color: #000000;
+   
+  }
+  .lnavItems{
+margin: 10px;
+padding-right: 120px;
+display: flex;
+align-items: center;
+gap: 10px;
+  }
