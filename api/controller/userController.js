@@ -26,7 +26,7 @@ const authUser = asyncHandler(async (req, res) => {
       generateToken(res,user._id)
 
       res.status(200).json(user);
-      console.log(user+"loginnnnnnnnnnnnnnnnnnn infooooo");
+
     } catch (err) {
       console.error(err);
       res.status(500).json({ message: 'Internal server error' });
