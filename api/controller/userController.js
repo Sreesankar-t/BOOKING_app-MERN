@@ -1,7 +1,6 @@
 import asyncHandler from 'express-async-handler'
 import generateToken from '../utils/generateToken.js';
 import User from '../models/userModel.js';
-import { Error } from 'mongoose';
 import bcrypt from "bcrypt";
 
 
@@ -21,6 +20,11 @@ const authUser = asyncHandler(async (req, res) => {
        
       if (!isPasswordCorrect) {
         return res.status(401).json({ message: 'Wrong password or email' });
+      }
+
+      if (!user.isUser) {
+       
+        return res.status(401).json({ message: "User is blocked. You are not allowed to login." });
       }
       // generate token 
       generateToken(res,user._id)

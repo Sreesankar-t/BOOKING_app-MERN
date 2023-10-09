@@ -1,0 +1,11 @@
+.hdlist{
+    display: flex;
+    width: 1500px;
+}
+
+.hdlistContainer{
+    flex: 6;
+    justify-content: start;
+    margin: 20px;
+    margin-top: 55px;
+}

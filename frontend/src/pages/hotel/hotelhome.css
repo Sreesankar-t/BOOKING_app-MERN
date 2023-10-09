@@ -1,0 +1,8 @@
+.hhome {
+    display: flex;
+  }
+  
+
+  .hhome .hhomeContainer {
+    flex: 6;
+  }

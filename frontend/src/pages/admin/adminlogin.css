@@ -1,0 +1,71 @@
+/* Centering the container both horizontally and vertically */
+.admincontainer{
+    height: 100Vh;
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+
+    
+ }
+
+.adminlogin {
+    max-width: 300px;
+   
+    padding: 40px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 300px; /* Make the container full-height of the viewport */
+  }
+  .adminlogin:hover{
+    background: linear-gradient(#b97272, #9198e5);
+ }
+  
+  /* Styling for input fields */
+  .alInput {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  /* Styling for the login button */
+  .alButton {
+    width: 100%;
+    padding: 10px;
+    background-color: #152a45; /* Facebook blue color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .alButton:hover {
+    background-color: #104777; /* Darker blue for hover effect */
+  }
+  
+  /* Styling for the ToastContainer */
+  .Toastify__toast-container {
+    z-index: 9999; /* Ensure it's above other content */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  /* Media query for smaller screens */
+  @media screen and (max-width: 600px) {
+    .adminlogin {
+      max-width: 90%; /* Adjust the container's width for smaller screens */
+    }
+  }
+  
+  .adminlogo{
+    padding-bottom: 50px;
+  }

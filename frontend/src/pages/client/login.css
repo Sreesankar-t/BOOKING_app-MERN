@@ -216,3 +216,7 @@ display: flex;
 align-items: center;
 gap: 10px;
   }
+
+  .userName{
+    margin-top: 4px;
+  }

@@ -7,6 +7,7 @@ import { notFound,errorHandler } from "./middleware/errorMiddleware.js";
 const port = process.env.PORT || 8000;
 import userRouters from './routes/userRoutes.js' 
 import adminRouter from './routes/adminRoutes.js'
+import hotelRouter from './routes/hotelRoutes.js'
 import cors from "cors"
 
 
@@ -21,8 +22,8 @@ app.use(cookieParser())
 
 
 app.use('/', userRouters);
-app.use('/admin/',adminRouter)
-
+app.use('/admin',adminRouter)
+app.use('/hotel',hotelRouter)
 
 
 app.get('/',(req,res)=>{

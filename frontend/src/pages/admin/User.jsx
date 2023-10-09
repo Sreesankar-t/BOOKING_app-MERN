@@ -5,12 +5,14 @@ import './user.css'
 
 
 
-export default function User() {
+export default function User({columns}) {
   return (
     <div className='list'>
      <Sidebar/>
+      
      <div className="listContainer">
-        <DataTable/>
+     
+        <DataTable columns={columns}/>
      </div>
     </div>
   )

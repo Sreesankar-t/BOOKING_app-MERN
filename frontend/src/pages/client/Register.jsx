@@ -23,7 +23,7 @@ export default function Register() {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    dispatch({ type: 'LOGIN_START' }); // You can reuse the LOGIN_START action
+    dispatch({ type: 'LOGIN_START' }); 
     try {
       const res = await axios.post('/register', credentials);
       console.log(res);
