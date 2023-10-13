@@ -35,6 +35,7 @@ const AuthReducer = (state, action) => {
       };
     case "LOGOUT":
       localStorage.removeItem("hotel")
+      localStorage.removeItem('toastShown');
       return {
     
         hotel: null,
@@ -48,7 +49,7 @@ const AuthReducer = (state, action) => {
 
 export const HotelAuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
- console.log(state,"shanku");
+
   useEffect(() => {
     localStorage.setItem("hotel", JSON.stringify(state.hotel));
     

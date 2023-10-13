@@ -1,0 +1,81 @@
+/* .rnew {
+    width: 100%;
+    display: flex;
+  }
+  
+  .rnewContainer {
+    flex: 6;
+  }
+  
+  .rtop,
+  .rbottom {
+    -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+    box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+    padding: 10px;
+    margin: 20px;
+    display: flex;
+  }
+  
+  .rtop h1 {
+    color: lightgray;
+    font-size: 20px;
+  }
+  
+  .rtop .left {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .rtop .left img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .rtop .rright {
+    flex: 2;
+  }
+  
+  .rtop .rright form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+  
+  .rtop .rright form .rformInput {
+    width: 40%;
+  }
+  
+  .rtop .rright form .rformInput label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .rtop .rright form .rformInput label .icon {
+    cursor: pointer;
+  }
+  
+  .rtop .rright form .rformInput input {
+    width: 100%;
+    padding: 5px;
+    border: none;
+    border-bottom: 1px solid gray;
+  }
+  
+  .roomButton{
+    width: 150px;
+    padding: 10px;
+    border: none;
+    background-color: rgb(0, 123, 123);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  } */
+  

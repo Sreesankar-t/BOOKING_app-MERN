@@ -7,7 +7,7 @@ export default function HotelDetails({columns}) {
     <div className='hdlist'>
     <Sidebar/>
     <div className="hdlistContainer">
-      <h3>Hotels</h3>
+     
        <DataTable columns={columns}/>
     </div>
    </div>

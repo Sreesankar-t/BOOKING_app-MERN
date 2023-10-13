@@ -1,6 +1,6 @@
 import  express  from "express";
 const router = express.Router()
-import { adminLogin,adminLogout, getUser,deleteUser,hideUser,UnHideUser ,getHotel,approveHotel} from "../controller/adminContriller.js";
+import { adminLogin,adminLogout, getUser,deleteUser,hideUser,UnHideUser ,getHotel,approveHotel} from "../controller/adminController.js";
 
 router.post('/login',adminLogin)
 

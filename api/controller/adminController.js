@@ -3,7 +3,7 @@ import generateToken from '../utils/generateToken.js';
 import Admin from '../models/admainModel.js';
 import bcrypt from "bcrypt";
 import User from '../models/userModel.js';
-import Hotel from '../models/hotelModel.js';
+import Hotel from '../models/hotel/hotelModel.js';
 
 
 

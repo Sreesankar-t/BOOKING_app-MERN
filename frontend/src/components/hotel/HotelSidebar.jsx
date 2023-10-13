@@ -51,16 +51,18 @@ const HotelSidebar = () => {
           </li> */}
           <p className="htitle">LISTS</p>
         
-          <Link to="" style={{ textDecoration: "none" }}>
+          <Link to="/listhotel" style={{ textDecoration: "none" }}>
             <li>
               <StoreIcon className="hicon" />
               <span>Hotels</span>
             </li>
           </Link>
+          <Link to="/listroom" style={{ textDecoration: "none" }}>
           <li>
             <CreditCardIcon className="hicon" />
             <span>Rooms</span>
           </li>
+          </Link>
 {/*        
           <li>
             <SettingsApplicationsIcon className="icon" />

@@ -22,6 +22,8 @@ export default function HotelRegister() {
     const navigate = useNavigate()
     const {hotel,loading,dispatch}=useContext(HotelAuthContext)
     const [data,setData]=useState(false)
+    const [togleButton,setogleButton]=useState(false)
+
 
    const handleChange =(e)=>{
     
@@ -41,23 +43,13 @@ export default function HotelRegister() {
         let approve = res.data.approveHotel
         
        if (approve == false) {
-        toast.warn("your approval requst is submitted success", {
-            transition:Zoom,
-            position: 'top-center',
-            autoClose:false,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: 'dark',
-            
-          });
+     
           setData(true)
+          setogleButton(true)
 
-       }else{
-        navigate("/login")
        }
+    
+
         
     } catch (error) {
         dispatch({type:'LOGIN_FAILURE',payload:error.response.data})
@@ -81,6 +73,11 @@ export default function HotelRegister() {
    }
    console.log(hotel);
 
+   const handlEnter = async()=>{
+    navigate('/hotellogin')
+   
+   }
+
 
   return (
     <div className="login-page">
@@ -97,9 +94,13 @@ export default function HotelRegister() {
        
         
         <div className="form-item">
-    {data ==true &&    <div>
-         <p style={{backgroundColor:'yellow'}}>You can acces the page affter admin approved !!</p>
-        </div>}
+
+{ data === true && (
+  <div>
+    <p style={{ backgroundColor: 'yellow' }}>You can access the page after admin approved !!</p>
+  </div>
+) }
+
           <label htmlFor="username">Hotel Name</label>
           <input type="text" id='name' onChange={handleChange} placeholder='name' />
         </div>
@@ -147,7 +148,8 @@ export default function HotelRegister() {
         <div className="form-item">
        
           
-          <button disabled={loading} onClick={handleClick} type="submit" className="login-form-button">Register</button>
+        { togleButton== false ? <button disabled={loading} onClick={handleClick} type="submit" className="login-form-button">Register</button>
+          :<button disabled={loading} onClick={handlEnter} type="submit" className="login-form-button">Go to page</button>}
         </div>
       </form>
       

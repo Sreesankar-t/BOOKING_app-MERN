@@ -8,7 +8,6 @@ const HotelPrivateRoute = () => {
     if (loading) {
       return <div>loading</div> ;
     }
-    
-      return hotel ? <Outlet/> : <Navigate to="/hotellogin" replace />;
+    return hotel && hotel. approveHotel === true  ? <Outlet/> : <Navigate to="/hotellogin" replace />;
     };
     export default HotelPrivateRoute;

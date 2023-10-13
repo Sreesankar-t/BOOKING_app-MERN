@@ -1,0 +1,13 @@
+.Llist{
+    display: flex;
+    width: 1500px;
+    display: flex;
+
+}
+
+.LlistContainer{
+    flex: 6;
+    justify-content: start;
+    margin: 20px;
+    margin-top: 80px;
+}
