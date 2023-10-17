@@ -36,14 +36,14 @@
     font-weight: 500;
   }
   
-  .fpRating>button{
-    background-color: #000000;
+  /* .fpRating>button{
+    background-color: #6b6060;
     color: white;
     border: none;
     padding: 3px;
     margin-right: 10px;
     font-weight: bold;
-  }
+  } */
   
   .fpRating>span{
     font-size: 14px;

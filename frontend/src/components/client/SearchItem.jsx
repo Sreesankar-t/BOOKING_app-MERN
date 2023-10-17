@@ -1,18 +1,22 @@
+import { Link } from 'react-router-dom'
 import './searchItem.css'
+import { Rating } from '@mui/material';
 
-export default function SearchItem() {
+export default function SearchItem({item}) {
   return (
     <div className='searchItem'>
-      <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aG90ZWwlMjByb29tfGVufDB8fDB8fHww&w=1000&q=80" alt="" className="siImg" />
+      <img src={item.photos[0]} alt="" className="siImg" />
       <div className="siDesc">
-      <h1 className="siTitle">Tower Street Apartments</h1>
-        <span className="siDistance">500m from center</span>
+      <h1 className="siTitle">{item.name}</h1>
+        <span className="siDistance"><b>{item.city}</b></span>
+        <span className="siDistance">{item.distance} km from City center</span>
         {/* <span className="siTaxiOp">Free airport taxi</span> */}
         <span className="siSubtitle">
-          Studio Apartment with Air conditioning
+        {item.desc}
+
         </span>
         <span className="siFeatures">
-          Entire studio • 1 bathroom • 21m² 1 full bed
+          {item.title}
         </span>
         <span className="siCancelOp">Free cancellation </span>
         <span className="siCancelOpSubtitle">
@@ -21,13 +25,22 @@ export default function SearchItem() {
       </div>
       <div className="siDetails">
         <div className="siRating">
-            <span>Excellent</span>
-            <button>7.8</button>
+        <Rating
+  name="simple-controlled"
+  value={item.rating}
+  readOnly={true}
+ 
+/>
+            <span>{item.rating >= 4 ?`Excellent`:`Good`}</span>
+           
         </div>
         <div className="siDetailTexts">
-            <span className="siPrice">₹ 12000</span>
+            <span className="siPrice">₹ {item.cheapestPrice}</span>
             <span className="siTaxOp">Include taxes and fees</span>
+            <Link to={`/hotelDetails/${item._id}`}>
             <button className='siCheckButton'>See availability</button>
+            </Link>
+           
         </div>
       </div>
     </div>

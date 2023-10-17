@@ -34,12 +34,15 @@ export default function Navbar() {
   return (
     <div className='navbar'>
      <div className="navContainer">
-        <span className="logo">WANDERINN</span>
+      <Link to='/' style={{color:'inherit', textDecoration:'none'}}>
+      <span className="logo">WANDERINN</span>
+      </Link>
+      
         <div className="navItems">
         {user ? (
   <>
     <div className='userName'>{user.name}</div>
-    <button className="navButton" onClick={handleLogout} >Logout</button>
+    <button className="logoutButton" onClick={handleLogout} >Logout</button>
   </>
 ) : (
   <>

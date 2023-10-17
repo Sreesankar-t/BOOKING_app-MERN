@@ -3,6 +3,7 @@
     background-color: #000000;
     display: flex;
     justify-content: center;
+   
   }
   
   .navContainer{
@@ -28,9 +29,23 @@
     background-color: rgb(79, 77, 77);
     height: 30px;
   }
+  .logoutButton{
+    margin-left: 20px;
+    border: none;
+  
+    cursor: pointer;
+    color: #ffffff;
+    border-radius: 4px;
+    background-color:  rgb(79, 77, 77);
+    height: 35px;
+    width: 70px;
+  }
   .navItems{
     display: flex;
     justify-content: center;
     margin: 30px;
+  }
+  .userName{
+    padding-top:  10px;
   }
 

@@ -1,21 +1,31 @@
-import  express  from "express";
+import express from 'express'
 const router = express.Router()
-import { adminLogin,adminLogout, getUser,deleteUser,hideUser,UnHideUser ,getHotel,approveHotel} from "../controller/adminController.js";
+import {
+  adminLogin,
+  adminLogout,
+  getUser,
+  deleteUser,
+  hideUser,
+  UnHideUser,
+  getHotel,
+  approveHotel
+} from '../controller/adminController.js'
 
-router.post('/login',adminLogin)
+router.post('/login', adminLogin)
 
-router.post('/logout',adminLogout)
+router.post('/logout', adminLogout)
 
-router.get('/users',getUser)
+router.get('/users', getUser)
 
-router.delete('/users/:id',deleteUser)
+router.delete('/users/:id', deleteUser)
 
-router.get('/hideuser/:id',hideUser)
+router.get('/hideuser/:id', hideUser)
 
-router.get('/unHideUser/:id',UnHideUser)
+router.get('/unHideUser/:id', UnHideUser)
 
-router.get('/hotellist',getHotel)
+router.get('/hotellist', getHotel)
 
-router.get('/hotellist/:id',approveHotel)
+router.get('/hotellist/:id', approveHotel)
 
 export default router
+

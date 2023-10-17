@@ -103,10 +103,11 @@ export default function HotelLogin() {
               placeholder="password"
               required
             />
+            
           </div>
           <div>
-          <Link to='/hotelregister'>
-            <p  className='tage'>Don't have an account Sign Up</p>
+          <Link style={{textDecoration:'none',color:''}} to='/hotelregister'>
+            <p  className='tage'>Don't have an account ? Sign Up</p>
             </Link>
           </div>
         
@@ -117,7 +118,7 @@ export default function HotelLogin() {
           <div className="form-item">
          
             
-            <button onClick={handleClick} type="submit" className="login-form-button">LOGIN</button>
+            <button onClick={handleClick} type="submit" className="login-form-button-hotel">LOGIN</button>
           </div>
         </form>
       </div>

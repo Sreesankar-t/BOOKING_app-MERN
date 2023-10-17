@@ -51,7 +51,7 @@
     },
     {
       id: "rating",
-      label: "Rating",
+      label: "Star Rating",
       type: "number",
       placeholder: "Enter raiting",
     },

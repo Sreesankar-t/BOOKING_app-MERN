@@ -6,7 +6,7 @@
   
   .listWrapper {
     width: 100%;
-    max-width: 1024px;
+    max-width: 1500px;
     display: flex;
     gap: 20px;
   }
@@ -61,23 +61,26 @@
   
   .lsOptions{
     padding: 10px;
-
+    font-size: 12px;
+    border-radius: 5;
   }
   
   .lsOptionItem{
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
-    color: #555;
+    color: #848484;
     font-size: 12px;
+    border-radius: 5;
    
   }
   
   .lsOptionInput{
     width: 50px;
-    border: none;
+    height: 30px;
+   border-color: #706f6f;
     border-radius: 5;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add box-shadow */
+    
   }
   
   .listSearch>button{
@@ -95,3 +98,68 @@
   .listResult {
     flex: 3;
   }
+
+
+
+
+
+
+
+
+.item {
+  align-items: center;
+  color: #FFF;
+  cursor: pointer;
+  display: flex;
+  font-size: 14px;
+  height: 40px;
+  justify-content: center;
+  width: 40px;
+}
+
+.disabled-page {
+  color: #808e9b;
+}
+
+.active {
+  border: solid 1px #808e9b;
+  border-radius: 40px;
+  color: #808e9b;
+}
+
+.break-me {
+}
+
+.next {
+  border-left: solid 1px #808e9b;
+  font-size: 4px;
+  height: 60px;
+  position: absolute;
+  right: 0;
+  width: 150px;
+}
+
+.pagination {
+  align-items: center;
+  background-color: #0fbcf9;
+  display: flex;
+  flex-direction: row;
+  height: 60px;
+  justify-content: center;
+  list-style-type: none;
+  position: relative;
+  width: 1000px;
+}
+
+.pagination-page {
+  font-weight: 700;
+}
+
+.previous {
+  border-right: solid 1px #808e9b;
+  font-size: 4px;
+  height: 60px;
+  left: 0;
+  position: absolute;
+  width: 150px;
+}

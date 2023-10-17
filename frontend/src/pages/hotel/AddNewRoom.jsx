@@ -1,13 +1,12 @@
-
-import { useState } from "react";
-import { roomInputs } from "../../formSource";
-import useFetch from "../../hooks/useFetch";
-import axios from "axios";
-import HotelSidebar from "../../components/hotel/hotelSidebar";
-import { ToastContainer, Zoom, toast } from "react-toastify";
+import { useContext, useState } from 'react'
+import { roomInputs } from '../../formSource'
+import useFetch from '../../hooks/useFetch'
+import axios from 'axios'
+import HotelSidebar from '../../components/hotel/hotelSidebar'
+import { ToastContainer, Zoom, toast } from 'react-toastify'
 import Swal from 'sweetalert2'
-import 'sweetalert2/dist/sweetalert2.min.css';
-
+import 'sweetalert2/dist/sweetalert2.min.css'
+import { HotelAuthContext } from '../../context/hotel/HotelContext'
 
 const showConfirmationDialog = () => {
   return Swal.fire({
@@ -16,64 +15,62 @@ const showConfirmationDialog = () => {
     icon: 'question',
     showCancelButton: true,
     confirmButtonText: 'Yes, create it!',
-    cancelButtonText: 'Cancel',
-  });
-};
-
+    cancelButtonText: 'Cancel'
+  })
+}
 
 const NewRoom = () => {
-  const [info, setInfo] = useState({});
-  const [hotelId, setHotelId] = useState(undefined);
+  const [info, setInfo] = useState({})
+  const [hotelId, setHotelId] = useState(undefined)
   // const [rooms, setRooms] = useState([]);
 
-  const { data, loading } = useFetch("/hotel/listhotel");
+  const { hotel } = useContext(HotelAuthContext)
+  const hotelid = hotel._id
 
-  const handleChange = (e) => {
-    setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-   
-  };
+  const { data, loading } = useFetch('/hotel/listhotel/:Id')
 
-  const handleClick = async (e) => {
-    e.preventDefault();
-    const confirmation = await showConfirmationDialog();
-    if (confirmation.isConfirmed){
-    try {
-      await axios.post(`/hotel/createroom/${hotelId}`, { ...info });
+  const handleChange = e => {
+    setInfo(prev => ({ ...prev, [e.target.id]: e.target.value }))
+  }
 
-      window.location.reload();
+  const handleClick = async e => {
+    e.preventDefault()
+    const confirmation = await showConfirmationDialog()
+    if (confirmation.isConfirmed) {
+      try {
+        await axios.post(`/hotel/createroom/${hotelId}`, { ...info, hotelid })
 
-    } catch (err) {
-      console.log(err);
-      toast.warn(err.response?.data?.message , {
-        transition:Zoom,
-        position: 'top-center',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'light',
-        
-      });
+        window.location.reload()
+      } catch (err) {
+        console.log(err)
+        toast.warn(err.response?.data?.message, {
+          transition: Zoom,
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light'
+        })
+      }
     }
   }
-  };
 
   console.log(info)
   return (
-    <div className="new">
+    <div className='new'>
       <HotelSidebar />
-      <div className="newContainer">
-   
-        <div className="top">
+      <div className='newContainer'>
+        <div className='top'>
           <h1>Add New Room</h1>
         </div>
-        <div className="bottom">
-          <div className="right">
+        <div className='bottom'>
+          <div className='right'>
             <form>
-              {roomInputs.map((input) => (
-                <div className="formInput" key={input.id}>
+              {roomInputs.map(input => (
+                <div className='formInput' key={input.id}>
                   <label>{input.label}</label>
                   <input
                     id={input.id}
@@ -83,36 +80,35 @@ const NewRoom = () => {
                   />
                 </div>
               ))}
-              <div className="formInput">
+              <div className='formInput'>
                 <label>Rooms</label>
                 <textarea
-                 id="rooms"
-                 onChange={handleChange}
-                  placeholder="give comma between room numbers."
+                  id='rooms'
+                  onChange={handleChange}
+                  placeholder='give comma between room numbers.'
                 />
               </div>
-              <div className="formInput">
+              <div className='formInput'>
                 <label>Choose a hotel</label>
-                <select
-                  id="hotelId"
-                  onChange={(e) => setHotelId(e.target.value)}
-                >
+                <select id='hotelId' onChange={e => setHotelId(e.target.value)}>
                   {loading
-                    ? "loading"
+                    ? 'loading'
                     : data &&
-                      data.map((hotel) => (
-                        <option key={hotel._id} value={hotel._id}>{hotel.name}</option>
+                      data.map(hotel => (
+                        <option key={hotel._id} value={hotel._id}>
+                          {hotel.name}
+                        </option>
                       ))}
                 </select>
               </div>
-              <button  onClick={handleClick}>Send</button>
+              <button onClick={handleClick}>Send</button>
             </form>
-            <ToastContainer/>
+            <ToastContainer />
           </div>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default NewRoom;
+export default NewRoom

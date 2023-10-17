@@ -34,7 +34,7 @@ export default function App() {
     <Route path='' element={<ClientPrivateRoute/>}>
     <Route path='/' element={<Home/>}  className="page-enter page-enter-active" />
     <Route path='/hotels' element={<List/> } className="page-enter page-enter-active" />
-    <Route path='/hotelDetails' element={<HotelDetails/>}  className="page-enter page-enter-active"/>
+    <Route path='/hotelDetails/:id' element={<HotelDetails/>}  className="page-enter page-enter-active"/>
     </Route>
     
     {/* clint routes */}

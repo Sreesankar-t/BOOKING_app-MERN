@@ -140,15 +140,15 @@ export default function HotelRegister() {
           <input type="password" id='confirm-password' onChange={handleChange} placeholder='enter confirm-password' />
         </div>
         <div>
-          <Link to='/hotellogin'>
-            <p  className='tage'>Already have an account Sign In</p>
+          <Link style={{textDecoration:"none"}} to='/hotellogin'>
+            <p  className='tage'>Already have an account ? Sign In</p>
             </Link>
           </div>
        
         <div className="form-item">
        
           
-        { togleButton== false ? <button disabled={loading} onClick={handleClick} type="submit" className="login-form-button">Register</button>
+        { togleButton== false ? <button disabled={loading} onClick={handleClick} type="submit" className="login-form-button-hotel ">Register</button>
           :<button disabled={loading} onClick={handlEnter} type="submit" className="login-form-button">Go to page</button>}
         </div>
       </form>

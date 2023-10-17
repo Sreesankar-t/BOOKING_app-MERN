@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import DataTable from '../../components/admin/DataTable'
 import HotelSidebar from '../../components/hotel/hotelSidebar'
 import './listhotel.css'

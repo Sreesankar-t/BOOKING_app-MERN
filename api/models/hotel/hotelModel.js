@@ -1,39 +1,37 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 const HotelSchema = new mongoose.Schema({
-    name:{
-        type:String,
-        required:true
-       },
-       email:{
-        type:String,
-        required:true,
-        unique:true
-       },
-       phone:{
-         type:String,
-         required:true,
-         
-       },
-       password:{
-        type:String,
-        required:true
-       },
-   
-  
-        address: {
-       type: String,
-       required: true,
-       },
-        document:{
-        type: [String]
-        },
+  name: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  phone: {
+    type: String,
+    required: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
 
-        approveHotel: {
-        type: Boolean,
-        default: false,
-        },
-   });
+  address: {
+    type: String,
+    required: true
+  },
+  document: {
+    type: [String]
+  },
 
-const Hotel = mongoose.model('Hotel',HotelSchema);
+  approveHotel: {
+    type: Boolean,
+    default: false
+  }
+})
 
-export default Hotel;
+const Hotel = mongoose.model('Hotel', HotelSchema)
+
+export default Hotel

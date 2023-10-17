@@ -1,13 +1,14 @@
 import  './addnewhotel.css'
 import HotelSidebar from '../../components/hotel/hotelSidebar';
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { hotelInputs } from "../../formSource";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
 import { ToastContainer, Zoom, toast } from 'react-toastify';
 import Swal from 'sweetalert2'
 import 'sweetalert2/dist/sweetalert2.min.css';
+import { HotelAuthContext } from '../../context/hotel/HotelContext';
 
 const showConfirmationDialog = () => {
   return Swal.fire({
@@ -25,7 +26,9 @@ const AddNewHotel = () => {
   const [info, setInfo] = useState({});
   const [rooms, setRooms] = useState([]);
 
-  const { data, loading } = useFetch("/hotel/listroom");
+  const {hotel} = useContext(HotelAuthContext)
+  const hotelId=hotel._id
+  const { data, loading } = useFetch("/hotel/listroom/:Id");
 
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -42,10 +45,11 @@ const AddNewHotel = () => {
   console.log(files)
 
   const handleClick = async (e) => {
+    e.preventDefault()
     const confirmation = await showConfirmationDialog();
 
     if (confirmation.isConfirmed){
-    e.preventDefault();
+
     try {
       const list = await Promise.all(
         Object.values(files).map(async (file) => {
@@ -66,13 +70,14 @@ const AddNewHotel = () => {
         ...info,
         rooms,
         photos: list,
+        hotelId
       };
 
     
 
       await axios.post("/hotel/createhotel", newhotel);
-
       window.location.reload();
+      
 
       
     } catch (err) {
@@ -139,14 +144,14 @@ const AddNewHotel = () => {
                   />
                 </div>
               ))}
-              <div className="formInput">
+              {/* <div className="formInput">
                 <label>Featured</label>
                 <select id="featured" onChange={handleChange}>
                   <option value={false}>No</option>
                   <option value={true}>Yes</option>
                 </select>
 
-              </div>
+              </div> */}
               <div className="selectRooms">
                 <label>Rooms</label>
                 <select id="rooms" multiple onChange={handleSelect}>

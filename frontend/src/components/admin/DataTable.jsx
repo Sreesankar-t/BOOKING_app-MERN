@@ -7,6 +7,8 @@ import axios from 'axios';
 import Swal from 'sweetalert2'
 import 'sweetalert2/dist/sweetalert2.min.css';
 import PropTypes from 'prop-types';
+import { useContext } from 'react';
+import { HotelAuthContext } from '../../context/hotel/HotelContext';
 
 
 
@@ -32,13 +34,15 @@ export default function DataTable({ columns }) {
   const [userStates, setUserStates] = useState({});
   const [hotelApprovals, setHotelApprovals] = useState({}); 
   const [loading, setLoading] = useState(true); // Initialize loading as true
+  const {hotel}=useContext(HotelAuthContext)
+  const hotelId = hotel._id
 
   useEffect(() => {
   
     const fetchData = async () => {
       try {
         if (path === "listhotel" || path === "listroom") {
-          const response = await axios.get(`/hotel/${path}`);
+          const response = await axios.get(`/hotel/${path}/${hotelId}`);
           const data = response.data;
           setList(data);
           setLoading(false); 
@@ -259,4 +263,5 @@ DataTable.propTypes = {
       width: PropTypes.number.isRequired,
     })
   ).isRequired,
+  
 }; 
