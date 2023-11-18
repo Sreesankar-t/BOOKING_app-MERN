@@ -1,18 +1,20 @@
-.featured{
+.featuredUser{
+ 
     width: 100%;
-    max-width: 1024px;
+    max-width: 2000px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     gap: 20px;
     z-index: 1;
   }
   
   .featuredItem{
+   
     position: relative;
     color: white;
     border-radius: 10px;
     overflow: hidden;
-    height: 250px;
+    height: 350px;
     flex:1
   }
   
@@ -26,4 +28,9 @@
     position: absolute;
     bottom: 20px;
     left: 20px;
+    
   }
+  .featuredTitles h1{
+   font-size: 40px;
+  }
+

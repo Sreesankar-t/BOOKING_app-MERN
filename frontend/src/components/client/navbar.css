@@ -1,14 +1,14 @@
-.navbar{
-    height: 50px;
+.navbarHome{
+    height: 80px;
     background-color: #000000;
     display: flex;
     justify-content: center;
-   
+
   }
   
   .navContainer{
     width: 100%;
-    max-width: 1024px;
+    max-width: 1500px;
     color: white;
     display: flex;
     align-items: center;
@@ -16,7 +16,8 @@
   }
   
   .logo{
-    font-weight: 500;
+    font-weight: 600;
+    font-size: larger;
   }
   
   .navButton{
@@ -36,9 +37,9 @@
     cursor: pointer;
     color: #ffffff;
     border-radius: 4px;
-    background-color:  rgb(79, 77, 77);
-    height: 35px;
-    width: 70px;
+    background-color:  rgb(31, 31, 31);
+    height: 45px;
+    width: 80px;
   }
   .navItems{
     display: flex;
@@ -46,6 +47,6 @@
     margin: 30px;
   }
   .userName{
-    padding-top:  10px;
+    padding-top:  15px;
   }
 

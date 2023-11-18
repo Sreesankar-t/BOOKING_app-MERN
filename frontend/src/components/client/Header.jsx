@@ -1,10 +1,10 @@
 import {
     faBed,
     faCalendarDays,
-    faEnvelope,
     faInfoCircle,
     faPerson,
     faUser,
+    faImage
   } from "@fortawesome/free-solid-svg-icons";
   import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
   import "./header.css";
@@ -19,7 +19,6 @@ import { SearchContext } from "../../context/client/SearchContext";
   const Header = ({ type }) => {
     const [destination, setDestination] = useState("");
     const [openDate, setOpenDate] = useState(false);
-    const [style, setStyle] = useState("headerListItem");
     const [dates, setDates] = useState([
       {
         startDate: new Date(),
@@ -50,34 +49,45 @@ import { SearchContext } from "../../context/client/SearchContext";
     const handleSearch = () => {
       dispatch({type:"NEW_SEARCH",payload:{destination,dates,options}})
       navigate("/hotels", { state: { destination, dates, options } });
-      setStyle ("headerListItem active")
+      // setStyle ("headerListItem active")
     };
 
-
-
+   
   
     return (
-      <div className="header">
+      <div className={ type === "list" ? "headerShort" : "header"}>
+
+        
         <div
           className={
             type === "list" ? "headerContainer listMode" : "headerContainer"
           }
         >
           <div className="headerList">
-            <div className={"headerListItem active"}>
+            <div className="headerListItem ">
               <FontAwesomeIcon icon={faBed} />
-              <Link to='/hotels' style={{color:"inherit", textDecoration: "none"}}>
+             
               <span onClick={handleSearch}>Hotels</span>
+              
+              
+            </div>
+            <div className="headerListItem ">
+             
+              <FontAwesomeIcon icon={faImage} />
+              <Link to='/listblogs' style={{color:"inherit", textDecoration: "none"}}>
+              <span >Blogs</span>
               </Link>
               
             </div>
-            <div className="headerListItem">
-              <FontAwesomeIcon icon={faEnvelope} />
-              <span >Contact</span>
-            </div>
+            
+         
+          
             <div className="headerListItem">
               <FontAwesomeIcon icon={faUser} />
-              <span>Acount</span>
+              <Link  to='/profile' style={{color:"inherit", textDecoration: "none"}}>
+              <span >Acount</span>
+              </Link>
+              
             </div>
             <div className="headerListItem">
               <FontAwesomeIcon icon={ faInfoCircle} />
@@ -91,15 +101,16 @@ import { SearchContext } from "../../context/client/SearchContext";
           {type !== "list" && (
             <>
               <h1 className="headerTitle">
-                A lifetime of discounts? It's Genius.
+                A lifetime of discounts? It's Genius. <br/>
+                Find the perfect holiday rental for your trip
               </h1>
-              {/* <p className="headerDesc">
-                Get rewarded for your travels – unlock instant savings of 10% or
-                more with a free Lamabooking account
-              </p> */}
+              <p className="headerDesc">
+         
+ flexible booking options on holiday homes, hotels, apartments,casinos and more
+              </p>
          
               <div className="headerSearch">
-                <div className="headerSearchItem">
+                <div className="headerSearchItemheader">
                   <FontAwesomeIcon icon={faBed} className="headerIcon" />
                   <input
                     type="text"
@@ -108,11 +119,11 @@ import { SearchContext } from "../../context/client/SearchContext";
                     onChange={(e) => setDestination(e.target.value)}
                   />
                 </div>
-                <div className="headerSearchItem">
+                <div className="headerSearchItemheader">
                   <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
                   <span
                     onClick={() => setOpenDate(!openDate)}
-                    className="headerSearchText"
+                    className="headerSearchTextheader"
                   >{`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(
                     dates[0].endDate,
                     "MM/dd/yyyy"
@@ -128,11 +139,11 @@ import { SearchContext } from "../../context/client/SearchContext";
                     />
                   )}
                 </div>
-                <div className="headerSearchItem">
+                <div className="headerSearchItemheader">
                   <FontAwesomeIcon icon={faPerson} className="headerIcon" />
                   <span
                     onClick={() => setOpenOptions(!openOptions)}
-                    className="headerSearchText"
+                    className="headerSearchTextheader"
                   >{`${options.adult} adult · ${options.children} children · ${options.room} room`}</span>
                   {openOptions && (
                     <div className="options">
@@ -202,7 +213,7 @@ import { SearchContext } from "../../context/client/SearchContext";
                     </div>
                   )}
                 </div>
-                <div className="headerSearchItem">
+                <div className="butnDiv">
                   <button className="headerBtn" onClick={handleSearch}>
                     Search
                   </button>

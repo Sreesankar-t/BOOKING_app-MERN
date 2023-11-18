@@ -1,0 +1,11 @@
+.bookinglist{
+    display: flex;
+    width: 100%;
+}
+
+.bookinglistContainer{
+    flex: 6;
+    justify-content: start;
+    margin: 20px;
+    margin-top: 55px;
+}

@@ -1,4 +1,5 @@
 .searchItem {
+  animation: popUp ease-in-out 350ms;
     border: 1px solid lightgray;
     padding: 10px;
     border-radius: 5px;
@@ -7,11 +8,12 @@
     gap: 20px;
     margin-bottom: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add box-shadow */
+   
   }
   
   .siImg {
-    width: 200px;
-    height: 200px;
+    width: 400px;
+    height: 305px;
     object-fit: cover;
     border-radius: 5px;
   }
@@ -24,16 +26,16 @@
   }
   
   .siTitle {
-    font-size: 20px;
+    font-size: 25px;
     color: #000305;
   }
   
   .siDistance {
-    font-size: 12px;
+    font-size: 17px;
   }
   
   .siTaxiOp {
-    font-size: 12px;
+    font-size: 17px;
     background-color: #008009;
     color: white;
     width: max-content;
@@ -42,22 +44,24 @@
   }
   
   .siSubtitle{
-    font-size: 12px;
-    font-weight: bold;
+    font-size: 15px;
+    color: rgb(174, 176, 176);
+    font-weight: lighter;
+    font-family:   Verdana, sans-serif;
   }
   
   .siFeatures{
-    font-size: 12px;
+    font-size: 17px;
   }
   
   .siCancelOp{
-    font-size: 12px;
+    font-size: 17px;
     color: #008009;
     font-weight: bold;
   }
   
   .siCancelOpSubtitle{
-    font-size: 12px;
+    font-size: 17px;
     color: #008009;
   }
   
@@ -97,7 +101,7 @@
   }
   
   .siTaxOp{
-    font-size: 12px;
+    font-size: 17px;
     color: gray;
   }
   
@@ -110,3 +114,25 @@
     cursor: pointer;
     border-radius: 5px;
   }
+
+  @keyframes popUp {
+    from {
+      transform: scale(0);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  /* @keyframes slideUp {
+    from {
+      transform: translateY(5px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+  } */

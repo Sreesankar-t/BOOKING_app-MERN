@@ -8,34 +8,67 @@ import {
   faCircleXmark,
   faLocationDot
 } from '@fortawesome/free-solid-svg-icons'
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react' // Added useEffect
 import { useLocation } from 'react-router-dom'
 import useFetch from '../../hooks/useFetch'
 import HashLoader from 'react-spinners/HashLoader'
 import { SearchContext } from '../../context/client/SearchContext'
+import Booking from '../../components/client/Booking'
+import { format } from 'date-fns'
+import { DateRange } from 'react-date-range'
+import Modal from 'react-modal'
+import { bookingModalStyles } from '../../ModelStyle'
 
 const HotelDetails = () => {
   const [slideNumber, setSlideNumber] = useState(0)
   const [open, setOpen] = useState(false)
+  const [modalIsOpen, setIsOpen] = useState(false)
+
+  const [openModal, setOpenModel] = useState(false)
+
+  const [dates1, setDates] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection'
+    }
+  ])
+
   const location = useLocation()
+
   const id = location.pathname.split('/')[2]
-  console.log(id)
 
   const { data, loading } = useFetch(`/hotel/getSingleHotel/${id}`)
 
-  const { dates, options } = useContext(SearchContext)
-  console.log(dates)
+  const { dates, options, dispatch } = useContext(SearchContext)
+
+  const [parsedDates, setParsedDates] = useState([]) // Store parsed dates
+
+  useEffect(() => {
+    if (dates && dates[0] && dates[0].startDate && dates[0].endDate) {
+      // Convert date strings to Date objects when dates are available
+      setParsedDates([
+        {
+          startDate: new Date(dates[0].startDate),
+          endDate: new Date(dates[0].endDate),
+          key: 'selection'
+        }
+      ])
+    }
+  }, [dates])
 
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24
   function daydiffrence (date1, date2) {
-    const timeDiff = Math.abs(date1.getTime() - date2.getTime())
-    const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY)
-    return diffDays
+    if (date1 instanceof Date && date2 instanceof Date) {
+      const timeDiff = Math.abs(date1.getTime() - date2.getTime())
+      const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY)
+      return diffDays
+    } else {
+      return 0
+    }
   }
-  const days =
-    dates[0]?.endDate && dates[0]?.startDate
-      ? daydiffrence(dates[0].endDate, dates[0].startDate)
-      : 0
+
+  const days = daydiffrence(parsedDates[0]?.endDate, parsedDates[0]?.startDate)
 
   const handleOpen = i => {
     setSlideNumber(i)
@@ -52,6 +85,40 @@ const HotelDetails = () => {
     }
 
     setSlideNumber(newSlideNumber)
+  }
+
+  const handleClick = () => {
+    setOpenModel(true)
+  }
+
+  const handleDate = () => {
+    setIsOpen(true)
+  }
+
+  const closeModal = () => {
+    setIsOpen(false)
+  }
+
+  const handleSelection = () => {
+    const selectedDates = [
+      {
+        startDate: dates1[0].startDate,
+        endDate: dates1[0].endDate,
+        key: 'selection'
+      }
+    ]
+
+    const selectedOptions = options
+
+    const selectedData = {
+      dates: selectedDates,
+      options: selectedOptions
+    }
+
+    dispatch({ type: 'NEW_SEARCH', payload: { ...selectedData } })
+
+    setIsOpen(false)
+    setOpenModel(true)
   }
 
   return (
@@ -129,21 +196,78 @@ const HotelDetails = () => {
                   <p className='hotelDesc'>{data.desc}</p>
                 </div>
 
-                <div className='hotelDetailsPrice'>
-                  <h1>Perfect for a {days}-night stay!</h1>
-                  <span>{data.title}</span>
-                  <h2>
-                    <b>{days * data.cheapestPrice * options.room}</b> ({days}{' '}
-                    nights)
-                  </h2>
-                  <button>Reserve or Book Now!</button>
-                </div>
+                {days !== 0 ? (
+                  <div className='hotelDetailsPrice'>
+                    <h1>Perfect for a {days}-night stay!</h1>
+                    <span>{data.title}</span>
+                    <h2>
+                      <b>₹ {days * data.cheapestPrice * options.room}</b> (
+                      {days} nights)
+                    </h2>
+                    <div className='btnContDiv'>
+                      <button className='bookingBtn' onClick={handleClick}>
+                        Reserve or Book Now!
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className='hotelDetailsPrice'>
+                    <span>{data.title}</span>
+                    <div className='btnContDiv'>
+                      <button className='bookingBtn' onClick={handleDate}>
+                        Reserve or Book Now!
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
             <div style={{ height: '70px' }}></div>
           </div>
         </>
       )}
+
+      <div>
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          style={bookingModalStyles}
+          contentLabel='Edit Profile Modal'
+        >
+          <div className='headerSearchItem'>
+            <div style={{ marginBottom: '30px' }}>
+              <h3>Select Your Dates</h3>
+            </div>
+
+            <span
+              style={{ marginBottom: '1px' }}
+              // onClick={() => setOpenDate(!openDate)}
+              className='headerSearchText'
+            >
+              {`${format(dates1[0].startDate, 'MM/dd/yyyy')} to ${format(
+                dates1[0].endDate,
+                'MM/dd/yyyy'
+              )}`}
+            </span>
+
+            <DateRange
+              editableDateInputs={true}
+              onChange={item => setDates([item.selection])}
+              moveRangeOnFirstSelection={false}
+              ranges={dates1}
+              className='date'
+              minDate={new Date()}
+            />
+          </div>
+          <div className='CBookingButtonT'>
+            <button onClick={handleSelection} className='BookingButtonT'>
+              Select
+            </button>
+          </div>
+        </Modal>
+      </div>
+
+      {openModal && <Booking setOpen={setOpenModel} hotelId={id} />}
     </div>
   )
 }

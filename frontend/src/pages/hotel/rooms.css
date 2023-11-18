@@ -1,6 +1,6 @@
 .Rlist{
     display: flex;
-    width: 1500px;
+    width: 100%;
     display: flex;
 
 }
@@ -10,4 +10,5 @@
     justify-content: start;
     margin: 20px;
     margin-top: 80px;
+    width: 100%;
 }

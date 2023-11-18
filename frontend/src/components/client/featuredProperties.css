@@ -1,6 +1,6 @@
 .fp {
     width: 100%;
-    max-width: 1024px;
+    max-width: 1500px;
     display: flex;
     justify-content: space-between;
     gap: 20px;
@@ -32,14 +32,19 @@
     font-weight: 500;
   }
   
-  .fpButton{
-    background-color: #010101;
-    color: white;
+  .fpIcon{
+   background-color: white;
+    color: #febb02;
     border: none;
     padding: 3px;
     margin-right: 10px;
     font-weight: bold;
-    width: 20px;
+    width: 25px;
+    height: 25px;
+  }
+  .starSPan{
+    font-size: 30px;
+    font-weight: 800;
   }
   
   .fpRating>span{

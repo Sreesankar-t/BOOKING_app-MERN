@@ -1,3 +1,4 @@
+/* Default styles for small screens and mobile devices */
 .navbar {
   height: 50px;
   border-bottom: 0.5px solid rgb(231, 228, 228);
@@ -72,4 +73,27 @@
   position: absolute;
   top: -5px;
   right: -5px;
+}
+
+/* Media query for laptop screens */
+@media (min-width: 1024px) {
+  .navbar {
+    /* Set fixed size for the navbar on laptops */
+    height: 70px;
+  }
+
+  .navbar .wrapper .search {
+    /* Adjust the search bar size for laptops */
+    height: 35px;
+  }
+
+  .navbar .wrapper .search input {
+    /* Adjust input font size for laptops */
+    font-size: 20px;
+  }
+
+  .navbar .wrapper .items .item {
+    /* Adjust item margin for laptops */
+    margin-right: 30px;
+  }
 }

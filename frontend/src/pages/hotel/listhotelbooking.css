@@ -1,0 +1,14 @@
+.LHlist{
+    display: flex;
+    width: 100%;
+    display: flex;
+
+}
+
+.LHlistContainer{
+    flex: 6;
+    justify-content: start;
+    margin: 20px;
+    margin-top: 80px;
+    width: 100%;
+}

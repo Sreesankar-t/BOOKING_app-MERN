@@ -1,54 +1,28 @@
+import useFetch from '../../hooks/useFetch'
 import './featuredBlogs.css'
-
-export default function FeaturedBlogs() {
+import { useNavigate } from 'react-router-dom'
+export default function FeaturedBlogs () {
+  const { data } = useFetch(`/admin/blogdetails?doc=${4}`)
+  const navigate = useNavigate()
+  const handleClick = (id)=>{
+     navigate (`/blogDetails/${id}`)
+  }
+  console.log(data)
   return (
-    <div className="fp">
-      <div className="fpItem">
-        <img
-          src="https://www.lifeberrys.com/img/article/winstar-world-casino-1619078138-lb.jpg"
-          alt=""
-          className="fpImg"
-        />
-        <span className="fpName">6 incredible Bangkok Hotels</span>
-        <span className="fpCity">Promising amazing city views ,
-         roof tops ,bars</span>
-      
-      </div>
-      <div className="fpItem">
-        <img
-          src="https://i0.wp.com/files.tripstodiscover.com/files/2016/11/bigstock-138178202-1.jpg?resize=784%2C588"
-          alt=""
-          className="fpImg"
-        />
-        <span className="fpName">6 incredible Bangkok Hotels</span>
-        <span className="fpCity">Promising amazing city views ,
-         roof tops ,bars</span>
-    
-       
-      </div>
-      <div className="fpItem">
-        <img
-          src="https://mindfultravelexperiences.com/wp-content/uploads/2020/10/macau-biggest-casinos-in-the-world.jpg"
-          alt=""
-          className="fpImg"
-        />
-        <span className="fpName">6 incredible Bangkok Hotels</span>
-        <span className="fpCity">Promising amazing city views ,
-         roof tops ,bars</span>
-        
-      </div>
-      <div className="fpItem">
-        <img
-          src="https://bitrebels.com/wp-content/uploads/2016/06/best-casinos-rio-vegas-nima-1.jpg"
-          alt=""
-          className="fpImg"
-        />
-        <span className="fpName">6 incredible Bangkok Hotels</span>
-        <span className="fpCity">Promising amazing city views ,
-        roof tops ,bars</span>
-      
-      </div>
-     
+    <div className='fp'>
+      {data
+        ? data.map(item => (
+            <div onClick={()=>handleClick(item._id)} key={item.id} className='fpItem'>
+              <img src={item.photos[0]} alt='' className='fpImg' />
+              <span className='fpName'>{item.title}</span>
+              <span className='fpCity'>
+                Promising amazing city views , roof tops ,bars
+              </span>
+            </div>
+          ))
+        : 
+        <div><h2>opss there is no item !!</h2></div>
+        }
     </div>
   )
 }

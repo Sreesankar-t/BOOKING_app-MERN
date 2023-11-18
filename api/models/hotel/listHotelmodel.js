@@ -1,4 +1,6 @@
 import mongoose from 'mongoose'
+import mongoosePaginate from 'mongoose-paginate-v2'
+
 const ListHotelSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -51,7 +53,7 @@ const ListHotelSchema = new mongoose.Schema({
   //   default: false,
   // },
 })
-
+ListHotelSchema.plugin(mongoosePaginate)
 const ListHotel = mongoose.model('ListHotel', ListHotelSchema)
 
 export default ListHotel

@@ -1,15 +1,28 @@
 .header {
+  background-image: url("https://images4.alphacoders.com/900/900368.jpg");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  height: 600px;
+}
+
+.headerShort {
     background-color: #000000;
     color: white;
     display: flex;
     justify-content: center;
     position: relative;
+   
     
   }
+
   
   .headerContainer {
     width: 100%;
-    max-width: 1024px;
+    max-width: 1500px;
     margin: 20px 0px 100px 0px;
   }
   
@@ -29,13 +42,31 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    cursor: pointer;
+    
+  }
+  .headerListItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease; /* Add a transition for smooth effect */
   }
   
-  .headerListItem.active {
-    border: 1px solid white;
-    padding: 10px;
-    border-radius: 20px;
+  .headerListItem span {
+    font-size: 20px;
   }
+  .headerListItem:hover span,
+  .headerListItem.hover span {
+    font-weight: 500; /* Use the correct value without a unit */
+  }
+  
+  .headerListItem:hover,
+  .headerListItem.hover {
+    color: #febb02;
+    transform: scale(1.1); /* Apply zooming effect on hover */
+  }
+  
   
   .headerDesc {
     margin: 20px 0px;
@@ -51,7 +82,7 @@
   }
   
   .headerSearch {
-    height: 30px;
+    height: 80px;
     background-color: white;
     border: 3px solid #febb02;
     display: flex;
@@ -62,14 +93,14 @@
     position: absolute;
     bottom: -25px;
     width: 100%;
-    max-width: 1024px;
+    max-width: 1500px;
   }
   
   .headerIcon {
     color: lightgray;
   }
   
-  .headerSearchItem {
+  .headerSearchItemheader {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -80,7 +111,7 @@
     outline: none;
   }
   
-  .headerSearchText {
+  .headerSearchTextheader {
     color: lightgray;
     cursor: pointer;
   }
@@ -118,15 +149,44 @@
     
   }
   
-  .optionCounterButton {
-    width: 30px;
-    height: 30px;
-    border: 1px solid #0895f3;
-    color: #06a9fa;
+  .headerBtn {
+    width: 75px;
+    height: 45px;
+    border-radius: 5px;
+    border: 1px solid #febb02;
+    color: #000000;
     cursor: pointer;
     background-color: white;
   }
-  
+  .optionCounterButton{
+    background-color: #fffcfc;
+    width: 35px;
+    height: 35px;
+    color: #000000;
+    border-radius: 5px;
+    border: 1px solid #0862d1;
+  }
   .optionCounterButton:disabled {
     cursor: not-allowed;
+    
   }
+
+  .headerTitle{
+   
+      font-size: 3em;
+      animation-name: fade;
+      animation-duration: 4s;
+  
+  }
+
+
+  /* ---------- Animation --------------- */
+@keyframes fade {
+  0% {
+      opacity: 0;
+      margin-left: 3em;
+  }
+  100% {
+      opacity: 1;
+  }
+}

@@ -1,165 +1,157 @@
+
 .listContainer {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  .listWrapper {
-    width: 100%;
-    max-width: 1500px;
-    display: flex;
-    gap: 20px;
-  }
-  
-  .listSearch {
-    flex: 1;
-    background-color: rgba(0, 0, 0, 0.09);
-    padding: 10px;
-    border-radius: 10px;
-    position: sticky;
-    top: 10px;
-    height: max-content;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add box-shadow */
-  }
-  
-  
-  .lsTitle{
-    font-size: 20px;
-    color: #555;
-    margin-bottom: 10px;
-  }
-  
-  .lsItem{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin-bottom: 10px;
-    
-  }
-  
-  .lsItem>label{
-    font-size: 12px;
-  }
-  
-  .lsItem>input{
-    height: 30px;
-    border: none;
-    border-radius: 5px;
-    padding: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add box-shadow */
-  }
-  .lsItem>span{
-    height: 30px;
-    padding: 5px;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add box-shadow */
- 
-  }
-  
-  .lsOptions{
-    padding: 10px;
-    font-size: 12px;
-    border-radius: 5;
-  }
-  
-  .lsOptionItem{
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    color: #848484;
-    font-size: 12px;
-    border-radius: 5;
-   
-  }
-  
-  .lsOptionInput{
-    width: 50px;
-    height: 30px;
-   border-color: #706f6f;
-    border-radius: 5;
-    
-  }
-  
-  .listSearch>button{
-    padding: 10px;
-    background-color: #3e3b3b;
-    color: white;
-    border: none;
-    width: 100%;
-    font-weight: 500;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add box-shadow */
-    border-radius: 10px;
-  }
-  
-  .listResult {
-    flex: 3;
-  }
-
-
-
-
-
-
-
-
-.item {
-  align-items: center;
-  color: #FFF;
-  cursor: pointer;
   display: flex;
-  font-size: 14px;
-  height: 40px;
   justify-content: center;
-  width: 40px;
+  margin-top: 20px;
+  
 }
 
-.disabled-page {
-  color: #808e9b;
+.listWrapper {
+  width: 100%;
+  max-width: 2000px;
+  display: flex;
+  gap: 20px;
 }
 
-.active {
-  border: solid 1px #808e9b;
-  border-radius: 40px;
-  color: #808e9b;
+.listSearch {
+  flex: 1;
+  background-color: #416597;
+  padding: 10px;
+  border-radius: 10px;
+  position: sticky;
+  top: 10px;
+  height: max-content;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add box-shadow */
 }
 
-.break-me {
+.lsTitle {
+  font-size: 20px;
+  color: #ffffff;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
 }
 
-.next {
-  border-left: solid 1px #808e9b;
-  font-size: 4px;
-  height: 60px;
-  position: absolute;
-  right: 0;
-  width: 150px;
+.lsItem {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.lsItem > label {
+  font-size: 17px;
+ 
+}
+
+.lsItem > input {
+  height: 50px;
+  font-size: 20px;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add box-shadow */
+  background-color: #e6e6e6;
+}
+.lsItem > span {
+  height: 50px;
+  padding: 5px;
+  background-color: #e6e6e6;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add box-shadow */
+}
+
+.lsOptions {
+  padding: 14px;
+  font-size: 18px;
+  border-radius: 5;
+}
+
+.lsOptionItem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  color: #ffffff;
+  font-size: 18px;
+  border-radius: 5;
+}
+
+.lsOptionInput {
+  width: 100px;
+  height: 40px;
+  font-size: 20px;
+  border-color: #ffffff;
+  border-radius: 5;
+  background-color: #e6e6e6;
+  padding-left: 10px;
+}
+
+.listSearch > button {
+  padding: 10px;
+  background-color:  #febb02;
+  color: rgb(0, 0, 0);
+  border: none;
+  width: 100%;
+  font-weight: 1000;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add box-shadow */
+  border-radius: 10px;
+  height: 50px;
+}
+
+.listResult {
+  flex: 3;
 }
 
 .pagination {
-  align-items: center;
-  background-color: #0fbcf9;
   display: flex;
-  flex-direction: row;
-  height: 60px;
+  align-items: center;
   justify-content: center;
-  list-style-type: none;
-  position: relative;
-  width: 1000px;
+  margin-top: 20px;
 }
 
-.pagination-page {
-  font-weight: 700;
+.pagination button {
+  background-color: #215194;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
 }
 
-.previous {
-  border-right: solid 1px #808e9b;
-  font-size: 4px;
-  height: 60px;
-  left: 0;
-  position: absolute;
-  width: 150px;
+.pagination button:hover {
+  background-color: #215194;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes moveSlow {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.items-per-page {
+  padding-bottom: 10px;
 }

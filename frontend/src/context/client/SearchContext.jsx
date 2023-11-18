@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 
 const INITIAL_STATE = {
   city: undefined,
@@ -24,7 +24,12 @@ const SearchReducer = (state, action) => {
 };
 
 export const SearchContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(SearchReducer, INITIAL_STATE);
+  const storedState = JSON.parse(localStorage.getItem("SearchItem"));
+  const [state, dispatch] = useReducer(SearchReducer, storedState || INITIAL_STATE);
+
+  useEffect(() => {
+    localStorage.setItem("SearchItem", JSON.stringify(state));
+  }, [state]);
 
   return (
     <SearchContext.Provider
@@ -39,6 +44,7 @@ export const SearchContextProvider = ({ children }) => {
     </SearchContext.Provider>
   );
 };
+
 
 
 

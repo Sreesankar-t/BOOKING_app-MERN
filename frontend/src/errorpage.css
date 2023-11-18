@@ -1,0 +1,45 @@
+.error-page-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+
+    background-color: #f4f4f4; /* Set your desired background color */
+  }
+  
+  .error-page {
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #4e54c8, #8f94fb); /* Set your desired gradient colors */
+    color: #fff;
+    width: 500px;
+    height: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .error-page h1 {
+    font-size: 80px;
+    margin: 0;
+  }
+  
+  .error-page h2 {
+    font-size: 24px;
+    margin: 10px 0;
+  }
+  
+  .error-back {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .error-back:hover {
+    background-color: #555;
+  }
+  

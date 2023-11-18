@@ -1,25 +1,34 @@
 /* .sidebar */
 .hsidebar {
-    flex: 1;
-    border-right: 0.5px solid rgb(230, 227, 227);
-    min-height: 100vh;
-    background-color: white;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  border-right: 0.5px solid rgb(230, 227, 227);
+  min-height: 100vh;
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  min-width: 350px;
+}
+
+@media (max-width: 768px) {
+  .hsidebar {
+    min-width: 250px; /* Adjust the width as needed for smaller screens */
   }
+}
+
   
   /* .sidebar .top */
   .hsidebar .htop {
-    height: 50px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #333;
   }
   
   /* .sidebar .top .logo */
   .hsidebar .htop .hlogo {
-    font-size: 20px;
-    font-weight: bold;
-    color: #6439ff;
+    font-size: 25px;
+    font-weight: 800;
+    color: #ffffff;
     
   }
   
@@ -31,7 +40,7 @@
   
   /* .sidebar .center */
   .hsidebar .hcenter {
-    padding-left: 10px;
+    padding-left: 20px;
   }
   
   /* .sidebar .center ul */
@@ -43,18 +52,19 @@
   
   /* .sidebar .center ul .title */
   .hsidebar .hcenter ul .htitle {
-    font-size: 10px;
+    font-size: 25px;
     font-weight: bold;
-    color: #999;
+    color: #a7a4a4;
     margin-top: 15px;
     margin-bottom: 5px;
   }
   
   /* .sidebar .center ul li */
   .hsidebar .hcenter ul li {
+    
     display: flex;
     align-items: center;
-    padding: 5px;
+    padding: 10px;
     cursor: pointer;
   }
   
@@ -65,23 +75,23 @@
   
   /* .sidebar .center ul li .icon */
   .hsidebar .hcenter ul li .hicon {
-    font-size: 18px;
-    color: #7451f8;
+    font-size: 28px;
+    color: rgb(68, 51, 127, 81, 248);
   }
   
   /* .sidebar .center ul li span */
   .hsidebar .hcenter ul li span {
-    font-size: 13px;
+    font-size: 23px;
     font-weight: 600;
-    color: #888;
-    margin-left: 10px;
+    color: #282727;
+    margin-left: 20px;
   }
   
   /* .sidebar .bottom */
   .hsidebar .bottom {
     display: flex;
     align-items: center;
-    margin: 10px;
+    margin: 20px;
   }
   
   /* .sidebar .bottom .colorOption */

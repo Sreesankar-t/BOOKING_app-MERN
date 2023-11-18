@@ -1,16 +1,17 @@
 import asyncHandler from 'express-async-handler'
-import generateToken from '../utils/generateToken.js'
+import { ownerToken } from '../utils/generateToken.js'
 import bcrypt from 'bcrypt'
 import Hotel from '../models/hotel/hotelModel.js'
 import ListHotel from '../models/hotel/listHotelmodel.js'
 import Room from '../models/hotel/roomModel.js'
+import Booking from '../models/user/bookingModel.js'
 
 const registerHotel = asyncHandler(async (req, res) => {
   const { name, email, password, number, Cpassword, address } = req.body
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   const nameRegex = /^[^\s\d]+$/
-  const trimmedAddress = address.trim()
+  const trimmedAddress = address ? address.trim() : ''
 
   if (!nameRegex.test(name)) {
     return res.status(400).json({ message: ' Please enter valid hotel name' })
@@ -23,8 +24,17 @@ const registerHotel = asyncHandler(async (req, res) => {
     return res.status(400).json({ message: 'please enter your address' })
   }
 
-  if (password.length < 4 || /\s/.test(password)) {
-    return res.status(400).json({ message: 'Password should be at least 4 ' })
+  if (
+    password.length < 4 ||
+    !/[A-Z]/.test(password) ||
+    !/[a-z]/.test(password) ||
+    !/\d/.test(password) ||
+    !/[^A-Za-z0-9]/.test(password)
+  ) {
+    return res.status(400).json({
+      message:
+        'Password should be at least 4 characters and should contain at least one uppercase letter, one lowercase letter, one number, and one special character.'
+    })
   }
 
   if (Cpassword && Cpassword !== password) {
@@ -54,7 +64,6 @@ const registerHotel = asyncHandler(async (req, res) => {
     await hotel.save()
 
     if (hotel) {
-      generateToken(res, hotel._id)
       res.status(200).json({
         _id: hotel._id,
         name: hotel.name,
@@ -97,7 +106,7 @@ const loginHotel = asyncHandler(async (req, res) => {
     }
 
     // generate token
-    generateToken(res, hotel._id)
+    ownerToken(res, hotel._id)
 
     res.status(200).json(hotel)
   } catch (err) {
@@ -107,7 +116,7 @@ const loginHotel = asyncHandler(async (req, res) => {
 })
 
 const hotelLogout = asyncHandler(async (req, res) => {
-  res.cookie('jwt', '', {
+  res.cookie('Ownerjwt', '', {
     httpOnly: true,
     expires: new Date(0)
   })
@@ -131,7 +140,7 @@ const CreateHotels = asyncHandler(async (req, res, next) => {
     hotelId
   } = req.body
 
-  const isRatingValid = rating >= 0 && rating <= 5 
+  const isRatingValid = rating >= 0 && rating <= 5
   const areFieldsNotEmpty =
     name &&
     city &&
@@ -144,11 +153,11 @@ const CreateHotels = asyncHandler(async (req, res, next) => {
     distance &&
     type &&
     cheapestPrice
-  const trimmedAddress = address.trim()
-  const trimmedName = name.trim()
-  const trimmedPrice = cheapestPrice.trim()
-  const validPrice = cheapestPrice >= 0
-  const lowercaseCity = city.toLowerCase()
+  const trimmedAddress = address ? address.trim() : ''
+  const trimmedName = name ? name.trim() : ''
+  const trimmedPrice = cheapestPrice ? cheapestPrice.trim() : ''
+  const validPrice = cheapestPrice ? cheapestPrice >= 0 : false
+  const lowercaseCity = city ? city.toLowerCase() : ''
 
   if (!areFieldsNotEmpty) {
     return res.status(400).json({ message: 'All fields are required.' })
@@ -198,16 +207,6 @@ const CreateHotels = asyncHandler(async (req, res, next) => {
 
 const getHotelList = asyncHandler(async (req, res) => {
   const hotelId = req.params.Id
-
-  if (hotelId == ':Id') {
-    try {
-      const hotels = await ListHotel.find()
-      res.status(200).json(hotels)
-    } catch (error) {
-      console.error(error)
-      res.status(500).json({ message: 'Internal server error' })
-    }
-  }
   try {
     const hotels = await ListHotel.find({ hotelId })
     res.status(200).json(hotels)
@@ -240,11 +239,11 @@ const CreateRoom = asyncHandler(async (req, res, next) => {
 
   const areFieldsNotEmpty = title && desc && price && maxPeople && rooms
 
-  const trimmedTitle = title.trim()
-  const trimmedDesc = desc.trim()
-  const trimmedPrice = price.trim()
+  const trimmedTitle = title ? title.trim() : ''
+  const trimmedDesc = desc ? desc.trim() : ''
+  const trimmedPrice = price ? price.trim() : ''
   const roomsPattern = /^[\d,]+$/
-  const validPrice = price >= 0
+  const validPrice = price ? price >= 0 : false
 
   if (!roomsPattern.test(rooms)) {
     return res.status(400).json({
@@ -298,17 +297,7 @@ const CreateRoom = asyncHandler(async (req, res, next) => {
 
 const getRoomlList = asyncHandler(async (req, res) => {
   const hotelid = req.params.Id
-  console.log(hotelid)
-  if (hotelid == ':Id') {
-    try {
-      const rooms = await Room.find()
 
-      res.status(200).json(rooms)
-    } catch (error) {
-      console.error(error)
-      res.status(500).json({ message: 'Internal server error' })
-    }
-  }
   try {
     const rooms = await Room.find({ hotelid })
 
@@ -352,14 +341,13 @@ const coutByCity = asyncHandler(async (req, res) => {
   }
 })
 
-
-
 const getHotels = async (req, res, next) => {
-  const { min, max, ...others } = req.query
+  const { min, max, page, perPage, ...others } = req.query
   const parsedMin = parseInt(min)
   const parsedMax = parseInt(max)
   let city = others.city
 
+  console.log(city, 'first')
   try {
     let query = {}
 
@@ -371,13 +359,16 @@ const getHotels = async (req, res, next) => {
       query.city = city
     }
 
+    const options = {
+      page: parseInt(page) || 1,
+      limit: parseInt(perPage) || 10 // Default to 10 items per page
+    }
+
     if (Object.keys(query).length === 0) {
-      
-      const hotels = await ListHotel.find()
+      const hotels = await ListHotel.paginate({}, options)
       res.status(200).json(hotels)
     } else {
-      
-      const hotels = await ListHotel.find(query)
+      const hotels = await ListHotel.paginate(query, options)
       res.status(200).json(hotels)
     }
   } catch (err) {
@@ -408,6 +399,289 @@ const getSingleHotel = async (req, res, next) => {
   }
 }
 
+const getHotelRoom = async (req, res, next) => {
+  try {
+    const hotel = await ListHotel.findById(req.params.id)
+    const list = await Promise.all(
+      hotel.rooms.map(room => {
+        return Room.findById(room)
+      })
+    )
+    res.status(200).json(list)
+  } catch (err) {
+    next(err)
+  }
+}
+
+export const updateRoomAvailability = async (req, res, next) => {
+  try {
+    await Room.updateOne(
+      { 'roomNumbers._id': req.params.id },
+      {
+        $push: {
+          'roomNumbers.$.unavailableDates': req.body.dates
+        }
+      }
+    )
+    res.status(200).json('Room status has been updated.')
+  } catch (err) {
+    next(err)
+  }
+}
+
+const updateRoomStatus = async (req, res, next) => {
+  console.log(req.body.dates, 'swamiiii')
+  try {
+    await Room.updateOne(
+      { 'roomNumbers._id': req.params.id },
+      {
+        $push: {
+          'roomNumbers.$.unavailableDates': req.body.dates
+        }
+      }
+    )
+    res.status(200).json('Room status has been updated.')
+  } catch (err) {
+    next(err)
+  }
+}
+
+const getHotelBookingDetails = asyncHandler(async (req, res) => {
+  const Id = req.params.id
+
+  try {
+    const data = await Booking.find({ ownerId: Id })
+
+    res.json(data)
+  } catch (error) {
+    console.error('Error fetching data:', error)
+    res.status(500).json({ error: 'Failed to fetch data' })
+  }
+})
+
+//Dashboard start
+const getTotalHotel = asyncHandler(async (req, res) => {
+  const id = req.params.id
+
+  try {
+    const total = await ListHotel.countDocuments({ hotelId: id })
+
+    res.status(200).json(total)
+  } catch (error) {}
+})
+
+const getTotalRoom = asyncHandler(async (req, res) => {
+  const id = req.params.id
+
+  try {
+    const total = await Room.countDocuments({ hotelid: id })
+
+    res.status(200).json(total)
+  } catch (error) {}
+})
+
+const getTotalBooking = asyncHandler(async (req, res) => {
+  const id = req.params.id
+
+  try {
+    const total = await Booking.countDocuments({ ownerId: id })
+
+    res.status(200).json(total)
+  } catch (error) {}
+})
+
+const todayBookingCount = asyncHandler(async (req, res) => {
+  const id = req.params.id
+
+  try {
+    const today = new Date()
+
+    today.setHours(0, 0, 0, 0)
+    const count = await Booking.countDocuments({
+      ownerId: id,
+      createdAt: { $gte: today }
+    })
+
+    res.status(200).json(count)
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error' })
+  }
+})
+
+const getTotalRoomPrice = asyncHandler(async (req, res) => {
+  const id = req.params.id
+  try {
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+
+    const pipeline = [
+      {
+        $match: {
+          ownerId: id,
+          createdAt: { $gte: today }
+        }
+      },
+      {
+        $group: {
+          _id: null,
+          totalRoomPrice: { $sum: '$totalAmount' }
+        }
+      }
+    ]
+
+    const result = await Booking.aggregate(pipeline)
+    const totalRoomPrice = result.length > 0 ? result[0].totalRoomPrice : 0
+
+    res.status(200).json(totalRoomPrice)
+  } catch (error) {
+    console.error('Error:', error)
+    res.status(500).json({ message: 'Internal server error' })
+  }
+})
+
+const getTotalPriceLastWeek = asyncHandler(async (req, res) => {
+  const id = req.params.id
+  try {
+    const lastWeek = new Date()
+    lastWeek.setDate(lastWeek.getDate() - 7)
+
+    const pipeline = [
+      {
+        $match: {
+          ownerId: id,
+          createdAt: { $gte: lastWeek }
+        }
+      },
+      {
+        $group: {
+          _id: null,
+          totalPriceLastWeek: { $sum: '$totalAmount' }
+        }
+      }
+    ]
+
+    const result = await Booking.aggregate(pipeline)
+    const totalPrice = result.length > 0 ? result[0].totalPriceLastWeek : 0
+
+    res.status(200).json(totalPrice)
+  } catch (error) {
+    console.error('Error:', error)
+    res.status(500).json({ message: 'Internal server error' })
+  }
+})
+
+const getTotalPriceLastMonth = asyncHandler(async (req, res) => {
+  const id = req.params.id
+  try {
+    const lastMonth = new Date()
+    lastMonth.setMonth(lastMonth.getMonth() - 1)
+
+    const pipeline = [
+      {
+        $match: {
+          ownerId: id,
+          createdAt: { $gte: lastMonth }
+        }
+      },
+      {
+        $group: {
+          _id: null,
+          totalPriceLastMonth: { $sum: '$totalAmount' }
+        }
+      }
+    ]
+
+    const result = await Booking.aggregate(pipeline)
+    const totalPrice = result.length > 0 ? result[0].totalPriceLastMonth : 0
+
+    res.status(200).json(totalPrice)
+  } catch (error) {
+    console.error('Error:', error)
+    res.status(500).json({ message: 'Internal server error' })
+  }
+})
+
+const getTotalPriceAllTime = asyncHandler(async (req, res) => {
+  const _id = req.params.id
+  try {
+    const pipeline = [
+      {
+        $match: {
+          ownerId: _id
+        }
+      },
+      {
+        $group: {
+          _id: null,
+          totalPriceAllTime: { $sum: '$totalAmount' }
+        }
+      }
+    ]
+
+    const result = await Booking.aggregate(pipeline)
+    const totalPrice = result.length > 0 ? result[0].totalPriceAllTime : 0
+
+    res.status(200).json(totalPrice)
+  } catch (error) {
+    console.error('Error:', error)
+    res.status(500).json({ message: 'Internal server error' })
+  }
+})
+
+const getTotalRoomPriceByMonth = asyncHandler(async (req, res) => {
+  const _id = req.params.id
+  try {
+    const pipeline = [
+      {
+        $match: {
+          ownerId: _id
+        }
+      },
+      {
+        $group: {
+          _id: {
+            $month: '$createdAt'
+          },
+          totalRoomPrice: { $sum: '$totalAmount' }
+        }
+      },
+      {
+        $sort: { _id: 1 }
+      }
+    ]
+
+    const result = await Booking.aggregate(pipeline)
+
+    const monthNames = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
+    ]
+    const data = Array.from({ length: 12 }, (_, month) => {
+      const monthData = result.find(item => item._id === month + 1)
+      return {
+        name: monthNames[month],
+        Total: monthData ? monthData.totalRoomPrice : 0
+      }
+    })
+
+    res.status(200).json(data)
+  } catch (error) {
+    console.error('Error:', error)
+    res.status(500).json({ message: 'Internal server error' })
+  }
+})
+//dashboard end
+
 export {
   registerHotel,
   loginHotel,
@@ -421,5 +695,17 @@ export {
   coutByCity,
   getHotelsUserSide,
   getHotels,
-  getSingleHotel
+  getSingleHotel,
+  getHotelRoom,
+  updateRoomStatus,
+  getHotelBookingDetails,
+  getTotalHotel,
+  getTotalRoom,
+  getTotalBooking,
+  todayBookingCount,
+  getTotalPriceAllTime,
+  getTotalPriceLastMonth,
+  getTotalPriceLastWeek,
+  getTotalRoomPrice,
+  getTotalRoomPriceByMonth
 }

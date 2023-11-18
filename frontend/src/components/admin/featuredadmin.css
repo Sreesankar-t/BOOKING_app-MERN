@@ -1,0 +1,94 @@
+.featured {
+    flex: 2;
+    -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+    box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+    padding: 10px;
+    flex-direction: column;
+  }
+  
+  .featured .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: gray;
+    height: 80px;
+  }
+  
+  .featured .top .title {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  .featured .bottom {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+   height:80%;
+  }
+  
+  .featured .bottom .featuredChart {
+    width: 50%;
+    height: 50%;
+  }
+  
+  .featured .bottom .title {
+    font-weight: 500;
+    font-size: 20px;
+    color: rgb(19, 82, 160);
+  }
+  
+  .featured .bottom .amount {
+    font-size: 40px;
+    font-weight: 700;
+    color: rgb(148, 94, 173);
+  }
+  
+  .featured .bottom .desc {
+    font-weight: 500;
+    font-size: 18px;
+    color: rgb(31, 30, 30);
+    text-align: center;
+  }
+  
+  .featured .bottom .summary {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .featured .bottom .summary .item {
+    text-align: center;
+  }
+  
+  .featured .bottom .summary .item .itemTitle {
+    font-size: 22px;
+    color: gray;
+    
+  }
+  
+  .featured .bottom .summary .item .itemResult {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    font-size: 20px;
+  }
+  
+  .featured .bottom .summary .item .itemResult.positive {
+    color:darkblue ;
+    
+   
+  }
+  
+  .featured .bottom .summary .item .itemResult.negative {
+    color: red;
+  }
+  
+  .custom-progress-bar {
+    width: 80%; 
+    height: 100%; 
+  }
+  

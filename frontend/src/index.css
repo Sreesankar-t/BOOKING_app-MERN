@@ -1,7 +1,10 @@
 *{
   margin: 0;
   padding: 0;
+  font-size: 18px;
 
+  font-family:  system-ui ,Avenir, Helvetica, Arial, sans-serif;
+ 
 }
 
 #root::-webkit-scrollbar{
@@ -78,4 +81,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-} */
+} 

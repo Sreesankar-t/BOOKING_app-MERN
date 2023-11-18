@@ -1,100 +1,128 @@
 .datatable {
-  height: 600px;
+  height: 100%;
   padding: 20px;
-  
-  .datatableTitle{
-    width: 100%;
-    font-size: 24px;
-    color: gray;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  width: 100%;
+}
 
-    .link{
-      text-decoration: none;
-      color: green;
-      font-size: 16px;
-      font-weight: 400;
-      border: 1px solid green;
-      padding: 5px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-  }
+.datatableTitle {
+  width: 100%;
+  font-size: 28px;
+  font-weight: 500;
+  color: rgb(176, 1, 1);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-  .cellWithImg {
-    display: flex;
-    align-items: center;
+.datatableTitle .link {
+  text-decoration: none;
+  color: rgb(70, 86, 95);
+  font-size: 18px;
+  font-weight: 500;
+  border: 3px solid rgb(30, 84, 164);
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+ 
+}
+.datatableTitle .link:hover {
+  text-decoration: none;
+  color: rgb(244, 253, 255);
+  font-size: 18px;
+  background-color: rgb(9, 117, 185);
+  font-weight: 500;
+  border: 3px solid rgb(4, 140, 207);
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-    .cellImg {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-right: 20px;
-    }
-  }
 
-  .cellWithStatus {
-    padding: 5px;
-    border-radius: 5px;
+.cellWithImg {
+  display: flex;
+  align-items: center;
+}
 
-    &.active {
-      background-color: rgba(0, 128, 0, 0.05);
-      color: green;
-    }
-    &.pending {
-      background-color: rgba(255, 217, 0, 0.05);
-      color: goldenrod;
-    }
-    &.passive {
-      background-color: rgba(255, 0, 0, 0.05);
-      color: crimson;
-    }
-  }
+.cellWithImg .cellImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 20px;
+}
 
-  .cellAction {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+.cellWithStatus {
+  padding: 5px;
+  border-radius: 5px;
+}
 
-    .viewButton {
-      padding: 2px 5px;
-      border-radius: 5px;
-      color: darkblue;
-      border: 1px dotted rgba(0, 0, 139, 0.596);
-      cursor: pointer;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    }
-    
-    .deleteButton {
-      padding: 2px 5px;
-      border-radius: 5px;
-      color: crimson;
-      border: 1px dotted rgba(220, 20, 60, 0.6);
-      cursor: pointer;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    }
-    .status{
-      padding: 2px 5px;
-      border-radius: 5px;
-      color: rgb(0, 0, 0);
-      background-color: rgb(96, 181, 11);
-      cursor: pointer;
-    }
-  }
-  /* CSS for centering the loader-container */
+.cellWithStatus.active {
+  background-color: rgba(0, 128, 0, 0.05);
+  color: green;
+}
+
+.cellWithStatus.pending {
+  background-color: rgba(255, 217, 0, 0.05);
+  color: goldenrod;
+}
+
+.cellWithStatus.passive {
+  background-color: rgba(255, 0, 0, 0.05);
+  color: crimson;
+}
+
+.cellAction {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.cellAction .viewButton {
+  font-size: 20px;
+  padding: 2px 5px;
+  border-radius: 5px;
+  color: darkblue;
+  border: 1px dotted rgba(0, 0, 139, 0.596);
+  cursor: pointer;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cellAction .deleteButton {
+  font-size: 20px;
+  padding: 2px 5px;
+  border-radius: 5px;
+  color: crimson;
+  border: 1px dotted rgba(220, 20, 60, 0.6);
+  cursor: pointer;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cellAction .status {
+  padding: 2px 5px;
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+  background-color: rgb(96, 181, 11);
+  cursor: pointer;
+}
+
 .loader-container {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 8px;
   padding: 20px;
-  z-index: 9999; /* Ensure it appears above other content */
+  z-index: 9999;
 }
 
+.ModalTitle{
+  display: flex;
+  justify-content: center;
+  margin: 30px;
 }
-
+.ModalTitle h2{
+  font-size: 25px;
+  color: brown;
+}
