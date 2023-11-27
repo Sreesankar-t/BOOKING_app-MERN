@@ -43,7 +43,7 @@ export const hotelInputs = [
   },
   {
     id: 'cheapestPrice',
-    label: 'Price',
+    label: 'CheapestPrice',
     type: 'number',
     placeholder: '100'
   },

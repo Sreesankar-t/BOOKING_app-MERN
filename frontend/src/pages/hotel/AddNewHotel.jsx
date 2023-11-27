@@ -9,13 +9,15 @@ import { ToastContainer, Zoom, toast } from 'react-toastify'
 import Swal from 'sweetalert2'
 import 'sweetalert2/dist/sweetalert2.min.css'
 import { HotelAuthContext } from '../../context/hotel/HotelContext'
-import ClipLoader from 'react-spinners/ClipLoader'
+
+import LoadingButton from '@mui/lab/LoadingButton'
 
 const AddNewHotel = () => {
   const [files, setFiles] = useState('')
   const [info, setInfo] = useState({})
   const [rooms, setRooms] = useState([])
-  const [spinner, setSpinner] = useState(false)
+  
+  const [sndloading, setSendLoading] = useState(false)
 
   const { hotel } = useContext(HotelAuthContext)
   const hotelId = hotel._id
@@ -30,26 +32,40 @@ const AddNewHotel = () => {
     setRooms(value)
   }
 
-  console.log(files)
+
 
   const handleClick = async e => {
     e.preventDefault()
-    setSpinner(true)
+    setSendLoading(true)
     try {
       const list = await Promise.all(
-        Object.values(files).map(async file => {
-          const data = new FormData()
-          data.append('file', file)
-          data.append('upload_preset', 'upload')
-          const uploadRes = await axios.post(
-            'https://api.cloudinary.com/v1_1/dxsaipqqs/image/upload',
-            data
-          )
-
-          const { url } = uploadRes.data
-          return url
+        Object.values(files).map(async (file) => {
+          const data = new FormData();
+          data.append('file', file);
+          data.append('upload_preset', 'upload');
+      
+          try {
+            const uploadRes = await fetch('https://api.cloudinary.com/v1_1/dxsaipqqs/image/upload', {
+              method: 'POST',
+              body: data,
+            });
+      
+            if (!uploadRes.ok) {
+              throw new Error(`Failed to upload file: ${uploadRes.statusText}`);
+            }
+      
+            const uploadData = await uploadRes.json();
+            const { url } = uploadData;
+            return url;
+          } catch (error) {
+            console.error(error);
+            // Handle the error as needed
+            throw error;
+          }
         })
-      )
+      );
+      
+      console.log(list,"jhgjhghg");
 
       const newhotel = {
         ...info,
@@ -57,11 +73,13 @@ const AddNewHotel = () => {
         photos: list,
         hotelId
       }
+      console.log(newhotel.photos,"epedraaaa");
 
       await axios.post('/hotel/createhotel', newhotel).then(res => {
         const data = res.data
         if (data) {
-          setSpinner(false)
+          setSendLoading(false)
+          console.log(data,"edhareeee");
         }
       })
 
@@ -75,7 +93,9 @@ const AddNewHotel = () => {
       })
     } catch (err) {
       console.log(err)
-
+      if (err) {
+        setSendLoading(false)
+      }
       toast.warn(err.response?.data?.message, {
         transition: Zoom,
         position: 'top-center',
@@ -150,17 +170,17 @@ const AddNewHotel = () => {
                       ))}
                 </select>
               </div>
-              <button onClick={handleClick}>
-                Send
-                <ClipLoader
-                  color='black'
-                  loading={spinner}
-                  // cssOverride={override}
-                  size={20}
-                  aria-label='Loading Spinner'
-                  data-testid='loader'
-                />
-              </button>
+              <LoadingButton
+                size='small'
+                onClick={handleClick}
+                //   endIcon={<SendIcon />}
+                loading={sndloading}
+                // loadingIndicator="Loading…"
+                loadingPosition='end'
+                variant='contained'
+              >
+                <span>Send</span>
+              </LoadingButton>
             </form>
             <ToastContainer />
           </div>

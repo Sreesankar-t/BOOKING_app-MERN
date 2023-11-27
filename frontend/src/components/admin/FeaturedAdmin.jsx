@@ -74,6 +74,8 @@ const Featured = () => {
     }
   }, [])
 
+  let color = path == 'hotel' ? '#be75be':'#8884d8'
+
   return (
     <div className='featured'>
       <div className='top'>
@@ -88,7 +90,7 @@ const Featured = () => {
             background
             backgroundPadding={10}
             styles={buildStyles({
-              backgroundColor: '#8884d8',
+              backgroundColor: color,
               textColor: '#fff',
               pathColor: '#fff',
               trailColor: 'transparent'

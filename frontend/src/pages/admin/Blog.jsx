@@ -8,6 +8,7 @@ import Swal from 'sweetalert2'
 import 'sweetalert2/dist/sweetalert2.min.css'
 import ClockLoader from 'react-spinners/ClockLoader'
 
+
 export default function Blog () {
   const [title, setTitle] = useState('')
   const [summary, setSummary] = useState('')
@@ -36,12 +37,17 @@ export default function Blog () {
             data.append('file', file)
             data.append('upload_preset', 'upload')
 
-            const uploadRes = await axios.post(
-              'https://api.cloudinary.com/v1_1/dxsaipqqs/image/upload',
-              data
-            )
-
-            const { url } = uploadRes.data
+            const uploadRes = await fetch(
+              'https://api.cloudinary.com/v1_1/dxsaipqqs/image/upload',{
+                method:'POST',
+                body:data
+              });
+      
+              if (!uploadRes.ok) {
+                throw new Error(`Failed to upload file: ${uploadRes.statusText}`);
+              }
+            const uploadData = await uploadRes.json()
+            const { url } = uploadData
             return url
           })
         )

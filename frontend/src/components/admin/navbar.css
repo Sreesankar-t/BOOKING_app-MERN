@@ -1,12 +1,14 @@
-/* Default styles for small screens and mobile devices */
 .navbar {
-  height: 50px;
+  height: 100px;
   border-bottom: 0.5px solid rgb(231, 228, 228);
   display: flex;
   align-items: center;
   font-size: 14px;
-  color: #555;
-  background-color: aliceblue;
+  color: #0e0e0e;
+  background-color: #ffffff;
+  width: 50%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 
 .navbar .wrapper {
@@ -15,16 +17,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  
 }
 
 .navbar .wrapper .search {
   display: flex;
-  height: 25px;
   align-items: center;
   border: 0.5px solid lightgray;
   padding: 3px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
 
 .navbar .wrapper .search input {
@@ -73,27 +73,4 @@
   position: absolute;
   top: -5px;
   right: -5px;
-}
-
-/* Media query for laptop screens */
-@media (min-width: 1024px) {
-  .navbar {
-    /* Set fixed size for the navbar on laptops */
-    height: 70px;
-  }
-
-  .navbar .wrapper .search {
-    /* Adjust the search bar size for laptops */
-    height: 35px;
-  }
-
-  .navbar .wrapper .search input {
-    /* Adjust input font size for laptops */
-    font-size: 20px;
-  }
-
-  .navbar .wrapper .items .item {
-    /* Adjust item margin for laptops */
-    margin-right: 30px;
-  }
 }

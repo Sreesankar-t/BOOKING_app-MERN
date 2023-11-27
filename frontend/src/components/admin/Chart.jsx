@@ -39,6 +39,8 @@ const Chart = () => {
     fetchData()
   }, [path, hotelId])
 
+  let color = path == 'hotel' ? '#be75be':'#8884d8'
+
   return (
     <div className='chart'>
       <div className='title'>booking amount month base</div>
@@ -51,7 +53,7 @@ const Chart = () => {
         >
           <defs>
             <linearGradient id='total' x1='0' y1='0' x2='0' y2='1'>
-              <stop offset='5%' stopColor='#8884d8' stopOpacity={0.8} />
+              <stop offset='5%' stopColor={color} stopOpacity={0.8} />
               <stop offset='95%' stopColor='#8884d8' stopOpacity={0} />
             </linearGradient>
           </defs>

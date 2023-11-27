@@ -139,7 +139,7 @@ const CreateHotels = asyncHandler(async (req, res, next) => {
     cheapestPrice,
     hotelId
   } = req.body
-
+console.log(req.body.photos,"images varoooooo");
   const isRatingValid = rating >= 0 && rating <= 5
   const areFieldsNotEmpty =
     name &&
@@ -202,6 +202,7 @@ const CreateHotels = asyncHandler(async (req, res, next) => {
     res.status(200).json(savedHotel)
   } catch (err) {
     next(err)
+     res.status(400).json({ message: 'server error' })
   }
 })
 
@@ -450,7 +451,7 @@ const getHotelBookingDetails = asyncHandler(async (req, res) => {
   const Id = req.params.id
 
   try {
-    const data = await Booking.find({ ownerId: Id })
+    const data = await Booking.find({ ownerId: Id }).sort({createdAt:-1})
 
     res.json(data)
   } catch (error) {

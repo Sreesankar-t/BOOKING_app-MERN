@@ -13,7 +13,7 @@ import Lightbox from 'react-lightbox-component'
 export default function EditBlog () {
   const [editData, setEditData] = useState({})
   const [blogData, setBlogData] = useState({})
-  const [changesMade, setChangesMade] = useState(false)
+ 
   const [sndloading, setSendLoading] = useState(false)
   const [files, setFiles] = useState([])
 
@@ -31,11 +31,12 @@ export default function EditBlog () {
   }, [data])
 
   const handleEdit = e => {
+    console.log("edit ayiiii");
     setEditData({
       ...editData,
       [e.target.name]: e.target.value
     })
-    setChangesMade(true)
+ 
   }
 
   const saveBlog = async e => {
@@ -59,7 +60,7 @@ export default function EditBlog () {
 
       const updatBlog = {
         ...editData,
-        photos: list
+        photos: list || data.photos
       }
 
       const response = await axios.put(`/admin/editBlog/${id}`, updatBlog)
@@ -73,7 +74,7 @@ export default function EditBlog () {
           icon: 'success',
           confirmButtonText: 'OK'
         })
-        setChangesMade(false)
+        
         setSendLoading(false)
       }
     } catch (error) {
@@ -90,8 +91,8 @@ export default function EditBlog () {
         }))
       : (data.photos || []).map(photo => ({
           src: photo,
-          title: 'Image Title',
-          description: 'Image Description'
+          title: '',
+          description: ''
         }))
 
   return (
@@ -163,7 +164,7 @@ export default function EditBlog () {
             }
           />
 
-          {changesMade ? (
+       
             <div>
               <LoadingButton
                 size='small'
@@ -177,16 +178,7 @@ export default function EditBlog () {
                 <span>Send</span>
               </LoadingButton>
             </div>
-          ) : (
-            <button
-              disabled
-              onClick={saveBlog}
-              className='EBbtnd'
-              type='submit'
-            >
-              Save Edit
-            </button>
-          )}
+          
         </form>
       </div>
     </div>

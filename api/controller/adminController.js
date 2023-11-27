@@ -426,7 +426,7 @@ const updateBlog = asyncHandler(async (req, res) => {
     blog.title = req.body.title || blog.title
     blog.summary = req.body.summary || blog.summary
     blog.content = req.body.content || blog.content
-    blog.photos = req.body.photos
+    blog.photos = req.body.photos.length === 0 ? blog.photos :req.body.photos
   }
 
   const updateBlog = blog.save()
@@ -435,7 +435,7 @@ const updateBlog = asyncHandler(async (req, res) => {
 
 const getAllBookings = asyncHandler(async (req, res) => {
   try {
-    const bookings = await Booking.find()
+    const bookings = await Booking.find().sort({createdAt:-1})
     console.log(bookings)
     res.status(200).json(bookings)
   } catch (error) {

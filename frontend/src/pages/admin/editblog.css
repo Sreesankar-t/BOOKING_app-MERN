@@ -5,10 +5,11 @@
     align-items: flex-start;
   }
   .SbarC{
-     width: 350px;
+     width:350px;
   }
  
 .Sidebar {
+  
     flex: 0 0 15%; /* Reduced width for the sidebar */
   }
   
